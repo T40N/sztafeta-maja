@@ -1,0 +1,32 @@
+#31666C - card color
+
+border-radius: 30px; - card radious
+
+background rectangle{
+width: 1390px;
+height: 682px;
+left: 25px;
+top: 166px;
+
+background: radial-gradient(88.63% 368.18% at 20.5% 44.57%, rgba(255, 255, 255, 0.53) 97.92%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+border-radius: 30px;
+}
+
+font{
+    font-family: Poppins;
+font-size: 40px;
+font-weight: 600;
+line-height: 60px;
+letter-spacing: 0em;
+text-align: left;
+}
+
+points background{
+    width: 335px;
+height: 82px;
+left: 1094px;
+top: 52px;
+
+background: radial-gradient(88.63% 368.18% at 20.5% 44.57%, rgba(255, 255, 255, 0.53) 97.92%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+border-radius: 20px;
+}

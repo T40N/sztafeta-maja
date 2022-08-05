@@ -1,0 +1,112 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background-image: url(/photos/background.png);
+  background-size: cover;
+  position: relative;
+  color: #31666c;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.points {
+  background: radial-gradient(
+      88.63% 368.18% at 20.5% 44.57%,
+      rgba(255, 255, 255, 0.53) 97.92%,
+      rgba(255, 255, 255, 0) 100%
+    )
+    /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+  border-radius: 30px;
+  text-align: start;
+  vertical-align: middle;
+  line-height: 50%;
+  width: 20%;
+  height: 110%;
+}
+
+h3 {
+  margin-left: 10%;
+}
+
+.playground {
+  position: absolute;
+  top: 15%;
+  right: 5%;
+  width: 90%;
+  height: 70%;
+  background: radial-gradient(
+      88.63% 368.18% at 20.5% 44.57%,
+      rgba(255, 255, 255, 0.53) 97.92%,
+      rgba(255, 255, 255, 0) 100%
+    )
+    /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.cards {
+  display: grid;
+  width: 90%;
+  height: 90%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  row-gap: 10%;
+  column-gap: 10%;
+  margin-top: 2.5%;
+}
+
+.card {
+  background-color: #31666c;
+  border-radius: 30px;
+  background-image: url(/photos/snowflake.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: 1s background-image, 1s color, 1s transform;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: transparent;
+}
+
+.card > p {
+  transform: rotate3d(0, 1, 0, 180deg);
+  text-align: center;
+}
+
+.card.turn {
+  transform: rotate3d(0, 1, 0, 180deg);
+  background-image: none;
+  color: #ffffff;
+}
+
+.options {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 90%;
+}
+
+button {
+  border: none;
+  border-radius: 1.2rem;
+  height: 2.2rem;
+  width: 6rem;
+  background-color: #9ef8ec;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+}
+
+.return {
+  /* transform: rotate3d(0, 1, 0, 180deg); */
+  background-color: #31666c;
+  background-image: none;
+  transition: 1s;
+}
