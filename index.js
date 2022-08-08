@@ -27,11 +27,18 @@ let idioms = data.map((idiom) => ({
 }));
 
 const audio = new Audio("./data/Rome.mp3");
+const endGameAudio = new Audio("./data/endgame-music.mp3");
 const language_ENG = "ENG";
 const language_PL = "PL";
 let cards = [...document.getElementsByClassName("card")];
+const points = document.getElementById("points");
 const startOverBtn = document.getElementById("start-over");
 const randomizeBtn = document.getElementById("Randomize");
+const muteBtn = document.getElementById("muteBtn");
+const endButton = document.getElementById("endButton");
+const gameEndModal = document.getElementById("gameEndModal");
+const newGameButton = document.getElementById("newGameButton");
+const snowflakeFigure = document.getElementById("snowflakeFigure");
 let gameArray = [];
 let first = true;
 let firstGuess = null;
@@ -39,7 +46,8 @@ let lock = false;
 let isAudioActive = true;
 let shuffledIndexes = [];
 let clearedCards = [];
-let eventfirst = true;
+let isRandomized = false;
+let end = false;
 
 const shuffle = () => {
   const shuffledIndexes = Array.from(Array(cards.length).keys());
@@ -68,8 +76,9 @@ const generateCard = () => {
 };
 
 const game = () => {
+  console.log(idioms);
   shuffledIndexes = shuffle();
-  generateCard();
+  if (!isRandomized) generateCard();
 
   for (const element of gameArray) {
     element.card.addEventListener("click", () => eventHandler(element));
@@ -77,9 +86,31 @@ const game = () => {
 };
 
 const randomize = () => {
-  refresh();
-  idioms = idioms.filter((idiom) => !idiom.guessed);
+  restart();
+  generateCard();
+  gameArray = gameArray.map((card) => {
+    if (clearedCards.includes(card.idiom)) {
+      card.card.style.visibility = "hidden";
+    }
+    return card;
+  });
+  isRandomized = true;
   game();
+};
+
+const gameEnd = () => {
+  endButton.style.visibility = "visible";
+};
+
+const chackIfGameOver = () => {
+  let count = 0;
+  idioms.forEach((idiom) => {
+    if (idiom.guessed === true) {
+      count++;
+    }
+  });
+
+  if (idioms.length === count) gameEnd();
 };
 
 const eventHandler = (element) => {
@@ -104,22 +135,23 @@ const eventHandler = (element) => {
       firstGuess.idiomIndex === element.idiomIndex &&
       firstGuess.language !== element.language
     ) {
+      snowflakeFigure.classList.add("animate__shakeY");
       idioms[element.idiomIndex].guessed = true;
       clear(firstGuess, element);
       firstGuess = null;
     }
   }
 
+  chackIfGameOver();
+
   first = !first;
 };
 
 const startGame = () => {
-  refresh();
   first = true;
   firstGuess = null;
   lock = false;
   gameArray = [];
-  eventfirst = true;
   //   idioms = data.map((idiom) => ({
   //     ...idiom,
   //     guessed: false,
@@ -132,6 +164,8 @@ const startGame = () => {
 };
 
 startOverBtn.addEventListener("click", (event) => {
+  restart();
+  clearedCards = [];
   startGame();
 });
 
@@ -139,12 +173,38 @@ randomizeBtn.addEventListener("click", (event) => {
   randomize();
 });
 
+muteBtn.addEventListener("click", (event) => {
+  if (isAudioActive) {
+    audio.pause();
+  } else {
+    audio.play();
+  }
+  isAudioActive = !isAudioActive;
+});
+
+endButton.addEventListener("click", (event) => {
+  endButton.style.visibility = "hidden";
+  gameEndModal.style.visibility = "visible";
+  endPointsCounter.innerHTML = points.innerHTML;
+  if (isAudioActive) endGameAudio.play();
+});
+
+newGameButton.addEventListener("click", (event) => {
+  gameEndModal.style.visibility = "hidden";
+  endGameAudio.pause();
+  restart();
+  clearedCards = [];
+  startGame();
+});
+
 const clear = (firstGuess, secondGuess) => {
   setTimeout(() => {
-    clearedCards.push(firstGuess);
-    clearedCards.push(secondGuess);
+    points.innerHTML = +points.innerHTML + 10;
+    clearedCards.push(firstGuess.idiom);
+    clearedCards.push(secondGuess.idiom);
     firstGuess.card.style.visibility = "hidden";
     secondGuess.card.style.visibility = "hidden";
+    snowflakeFigure.classList.remove("animate__shakeY");
   }, 1500);
 };
 
@@ -172,7 +232,7 @@ const showIdiom = (element) => {
   element.card.insertAdjacentHTML("afterbegin", `<p>${element.idiom}</p>`);
 };
 
-const refresh = () => {
+const restart = () => {
   const container = document.getElementById("cards");
   cards = cards.map((card) => {
     card.remove();
@@ -180,7 +240,6 @@ const refresh = () => {
     card.classList.add("card");
     container.appendChild(card);
     return card;
-    // card.removeEventListener("click", eventHandler);
   });
 };
 

@@ -92,6 +92,14 @@ h3 {
   width: 90%;
 }
 
+.game-buttons {
+  height: 2rem;
+  width: 18rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 button {
   border: none;
   border-radius: 1.2rem;
@@ -102,6 +110,62 @@ button {
   font-family: "Poppins";
   font-style: normal;
   font-weight: 600;
+}
+
+.end-button {
+  visibility: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.muteBtn {
+  border-radius: 50%;
+  width: 1.8rem;
+  height: 1.8rem;
+  padding: 1.4rem;
+  aspect-ratio: 1/1;
+  background: url("./photos/volume-mute-1.png") center/50% no-repeat, #9ef8ec;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+button:active {
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
+}
+
+.game-end-modal {
+  visibility: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 30%;
+  height: 40%;
+
+  background: radial-gradient(
+    88.63% 368.18% at 20.5% 44.57%,
+    rgba(255, 255, 255, 0.53) 97.92%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #31666c;
+  border-radius: 1.8rem;
+}
+
+.snowflake-figure {
+  width: 10%;
+  aspect-ratio: 1/1;
+  background: url("./photos/snowflake-figure.png") center/contain no-repeat;
+  z-index: 1;
+  position: absolute;
+  left: 45%;
+  bottom: 5;
 }
 
 .return {

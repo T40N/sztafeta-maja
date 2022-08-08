@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/index.css" />
     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap"
       rel="stylesheet"
     />
@@ -15,10 +19,10 @@
       <div class="game-buttons">
         <button id="start-over">Start over</button>
         <button id="Randomize">Randomize</button>
+        <button id="muteBtn" class="muteBtn"></button>
       </div>
       <article class="points">
-        <h3>Punkty: 0</h3>
-        <!-- zmieni się w js'ie -->
+        <h3>Punkty: <span id="points">0</span></h3>
       </article>
     </div>
     <section class="playground">
@@ -33,6 +37,13 @@
         <div class="card"></div>
       </section>
     </section>
+    <button class="end-button" id="endButton">You got It!</button>
+    <div class="game-end-modal" id="gameEndModal">
+      <h1>Great job</h1>
+      <p>You got <span id="endPointsCounter"></span> points</p>
+      <button class="new-game-button" id="newGameButton">New game</button>
+    </div>
+    <div class="snowflake-figure animate__animated" id="snowflakeFigure"></div>
     <script src="/index.js" type="module"></script>
   </body>
 </html>
